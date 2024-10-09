@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+var SPEED = 300.0
 @export var JUMP_VELOCITY = -400.0
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -26,9 +25,6 @@ func _physics_process(delta: float) -> void:
 	else: 
 			$AnimatedSprite2D.play("idle");
 
-		
-		
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("A", "D")
@@ -39,3 +35,17 @@ func _physics_process(delta: float) -> void:
 		
 
 	move_and_slide()
+	
+func get_speed() -> int: 
+	return SPEED
+	
+func set_speed(defined_speed:int) -> void:
+	print("speed set to ", defined_speed)
+	SPEED = defined_speed
+
+func get_jump_velocity() -> int: 
+	return JUMP_VELOCITY
+	
+func set_jump_velocity(jump_velocity:int) -> void:
+	print("speed set to ", jump_velocity)
+	JUMP_VELOCITY = jump_velocity

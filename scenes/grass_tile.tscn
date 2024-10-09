@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4ikno1ptci3p"]
+
+[ext_resource type="Texture2D" uid="uid://b452an7l2ye44" path="res://textures/tiles.png" id="1_q6i1v"]
+[ext_resource type="Script" path="res://scenes/grass_tile.gd" id="1_rmnuf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg3s6"]
+size = Vector2(16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax0ji"]
+atlas = ExtResource("1_q6i1v")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7tkx"]
+size = Vector2(16, 16)
+
+[node name="grass_tile" type="Area2D"]
+script = ExtResource("1_rmnuf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_lg3s6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ax0ji")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_q7tkx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_q7tkx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
